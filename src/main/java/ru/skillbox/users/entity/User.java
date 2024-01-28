@@ -3,6 +3,7 @@ package ru.skillbox.users.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Table(name = "\"user\"")
 @Builder
 @AllArgsConstructor
+@Getter
 @ToString
 public class User {
 

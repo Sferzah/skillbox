@@ -3,6 +3,7 @@ package ru.skillbox.users.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Table(name = "subscription")
 @Builder
 @AllArgsConstructor
+@Getter
 @ToString
 public class Subscription {
 
@@ -23,11 +25,11 @@ public class Subscription {
     }
 
     @ManyToOne
-    @JoinColumn(name = "owner")
+    @JoinColumn(name = "owner_id")
     private User owner;
 
     @ManyToOne
-    @JoinColumn(name = "follower")
+    @JoinColumn(name = "follower_id")
     private User follower;
 
     @Column
