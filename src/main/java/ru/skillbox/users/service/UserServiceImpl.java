@@ -13,31 +13,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    final UserRepository repository;
+    final UserRepository userRepository;
 
     @Override
     public String createUser(User user) {
-        return repository.save(user).getId() + "";
+        return userRepository.save(user).getId() + "";
     }
 
     @Override
     public User getUser(long id) {
-        return repository.findById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public String updateUser(long id, User user) {
-        if(repository.existsById(id)) {
-            return repository.save(user).getId() + "";
+        if(userRepository.existsById(id)) {
+            return userRepository.save(user).getId() + "";
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @Override
     public String deleteUser(long id) {
-        if(repository.existsById(id)) {
-            repository.deleteById(id);
+        if(userRepository.existsById(id)) {
+            userRepository.deleteById(id);
             return "ok";
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsers() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
 }

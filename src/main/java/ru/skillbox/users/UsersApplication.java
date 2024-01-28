@@ -18,7 +18,7 @@ public class UsersApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UsersApplication.class, args);
 	}
-	@Bean
+//	@Bean
 	CommandLineRunner demoJPA(UserRepository userRepository, SubscriptionRepository subscriptionRepository) {
 
         return(args)-> {

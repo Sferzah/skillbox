@@ -1,15 +1,16 @@
 package ru.skillbox.users.service;
 
 import ru.skillbox.users.entity.Subscription;
+import ru.skillbox.users.entity.User;
 
 import java.util.List;
 
 public interface SubscriptionService {
-    List<Subscription> getSubscriptions();
 
-    Subscription getSubscription(long id);
+    String createSubscription(long ownerId, long followerId);
 
-    String createSubscription(Subscription subscription);
+    String deleteSubscription(long ownerId, long followerId);
 
-    String deleteSubscription(long id);
+    List<User> getFollowers(long ownerId);
+    
 }

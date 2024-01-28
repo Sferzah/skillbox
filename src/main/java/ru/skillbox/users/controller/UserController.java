@@ -3,6 +3,7 @@ package ru.skillbox.users.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.skillbox.users.entity.User;
+import ru.skillbox.users.service.SubscriptionService;
 import ru.skillbox.users.service.UserService;
 
 import java.util.List;
@@ -10,31 +11,49 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserTasks, SubscribtionTasks {
 
-    final UserService service;
-    @PostMapping
-    String createUser(@RequestBody User user) {
-        return service.createUser(user);
+    final UserService userService;
+    final SubscriptionService subscriptionService;
+
+    @Override
+    public String createUser(User user) {
+        return userService.createUser(user);
     }
 
-    @GetMapping(path = "/{id}")
-    User getUser(@PathVariable long id) {
-        return service.getUser(id);
+    @Override
+    public User getUser(long id) {
+        return userService.getUser(id);
     }
 
-    @PutMapping(path = "/{id}")
-    String updateUser(@RequestBody User user, @PathVariable long id) {
-        return service.updateUser(id, user);
+    @Override
+    public String updateUser(User user, long id) {
+        return userService.updateUser(id, user);
     }
 
-    @DeleteMapping(path = "/{id}")
-    String deleteUser(@PathVariable long id) {
-        return service.deleteUser(id);
+    @Override
+    public String deleteUser(long id) {
+        return userService.deleteUser(id);
     }
 
-    @GetMapping()
-    List<User> getUsers() {
-        return service.getUsers();
+    @Override
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
+
+
+    @Override
+    public String subscribe(long ownerId, long followerId) {
+        return subscriptionService.createSubscription(ownerId, followerId);
+    }
+
+    @Override
+    public String unsubscribe(long ownerId, long followerId) {
+        return subscriptionService.deleteSubscription(ownerId, followerId);
+    }
+
+    @Override
+    public List<User> getFollowers(long ownerId) {
+        return subscriptionService.getFollowers(ownerId);
     }
 }
