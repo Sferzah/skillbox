@@ -1,10 +1,7 @@
 package ru.skillbox.users.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -14,6 +11,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @Getter
+@Setter
 @ToString
 public class User {
 
