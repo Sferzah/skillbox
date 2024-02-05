@@ -1,0 +1,97 @@
+databaseChangeLog:
+  - changeSet:
+      id: 000-1
+      author: Sferzah
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  autoIncrement: true
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar
+              - column:
+                  name: middle_name
+                  type: varchar
+              - column:
+                  name: last_name
+                  type: varchar
+              - column:
+                  name: gender
+                  type: varchar
+              - column:
+                  name: birth_date
+                  type: date
+              - column:
+                  name: city
+                  type: varchar
+              - column:
+                  name: ava_id
+                  type: varchar
+              - column:
+                  name: about
+                  type: varchar
+              - column:
+                  name: nick_name
+                  type: varchar
+              - column:
+                  name: hard_skills
+                  type: varchar
+              - column:
+                  name: email
+                  type: varchar
+              - column:
+                  name: phone
+                  type: varchar
+  - changeSet:
+      id: 000-2
+      author: Sferzah
+      changes:
+        - createTable:
+            tableName: subscription
+            columns:
+              - column:
+                  name: id
+                  autoIncrement: true
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: owner_id
+                  type: int
+              - column:
+                  name: follower_id
+                  type: int
+  - changeSet:
+      id: 000-3
+      author: Sferzah
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: subscr_owner_fk
+            baseTableName: subscription
+            baseColumnNames: owner_id
+            referencedTableName: user
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            constraintName: subscr_follower_fk
+            baseTableName: subscription
+            baseColumnNames: follower_id
+            referencedTableName: user
+            referencedColumnNames: id
+  - changeSet:
+      id: 000-4
+      author: Sferzah
+      changes:
+        - createIndex:
+            tableName: user
+            indexName: user_city_i
+            columns:
+              - column:
+                  name: city
